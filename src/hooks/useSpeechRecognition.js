@@ -15,7 +15,10 @@ const useSpeechRecognition = () => {
   useEffect(() => {
     if (!recognition) return;
     recognition.onresult = (event) => {
-      setText(event.results[0][0].transcript);
+      let data = Array.from(event.results)
+        .map((result) => result[0].transcript)
+        .join(" ");
+      setText(data);
     };
     recognition.onend = () => {
       setIsListening(false);
